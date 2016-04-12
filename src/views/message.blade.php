@@ -1,12 +1,12 @@
-@if (Session::has('flash_notification.message'))
-    @if (Session::has('flash_notification.overlay'))
+@if (session()->has('flash_notification.message'))
+    @if (session()->has('flash_notification.overlay'))
         @include('flash::modal', [
             'modalClass' => 'flash-modal', 
             'title'      => session('flash_notification.title'), 
             'body'       => session('flash_notification.message')
         ])
     @else
-        <div class="alert alert-{{ Session::get('flash_notification.level') }}">
+        <div class="alert alert-{{ session('flash_notification.level') }}">
             <button type="button" 
                     class="close" 
                     data-dismiss="alert" 
@@ -19,7 +19,9 @@
                 @endforeach
             </ul>
             @else
-                {!! strip_tags(session('flash_notification.message'), '<i><b><span><strong>') !!}
+                {!! strip_tags( session('flash_notification.message'), 
+                                '<i><b><span><strong><h1><h2><h3><h4><h5><h6>' ) 
+                !!}
             @endif
         </div>
     @endif
