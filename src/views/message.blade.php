@@ -13,21 +13,26 @@
                     aria-hidden="true">&times;</button>
                 
             @if(is_array(session('flash_notification.message')))
+            <ul>
                 @foreach(session('flash_notification.message') as $msg)
-                    {!! $msg !!}
+                    <li>{!! strip_tags($msg, '<i><b><span><strong>') !!}</li>
                 @endforeach
+            </ul>
             @else
-                {{ session('flash_notification.message') }}
+                {!! strip_tags(session('flash_notification.message'), '<i><b><span><strong>') !!}
             @endif
         </div>
     @endif
     
 @elseif(count($errors) > 0)
     <div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <button type="button" 
+                class="close" 
+                data-dismiss="alert" 
+                aria-hidden="true">&times;</button>
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{!! strip_tags($error, '<i><b><span><strong>') !!}</li>
+                <li>{{ $error }}</li>
             @endforeach
         </ul>
     </div>
